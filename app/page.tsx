@@ -8,19 +8,19 @@ export default function HomePage() {
       id: 1,
       title: 'First Blog Post',
       subtitle: 'This is the subtitle of the first blog post.',
-      imageUrl: 'https://via.placeholder.com/600x400'
+      imageUrl: 'https://via.placeholder.com/600x400',
     },
     {
       id: 2,
       title: 'Second Blog Post',
       subtitle: 'This is the subtitle of the second blog post.',
-      imageUrl: 'https://via.placeholder.com/600x400'
+      imageUrl: 'https://via.placeholder.com/600x400',
     },
     {
       id: 3,
       title: 'Third Blog Post',
       subtitle: 'This is the subtitle of the third blog post.',
-      imageUrl: 'https://via.placeholder.com/600x400'
+      imageUrl: 'https://via.placeholder.com/600x400',
     },
   ];
 
