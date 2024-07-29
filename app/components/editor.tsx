@@ -16,7 +16,7 @@ import axios from 'axios';
 import './editor.css';
 
 interface BlogPost {
-    text: string;
+  text: string;
 }
 
 const EditPage = () => {
@@ -45,29 +45,34 @@ const EditPage = () => {
     fetchPost();
   }, []);
 
-  const editor = useEditor({
-    extensions: [
+  const editor = useEditor(
+    {
+      extensions: [
         Color.configure({ types: [TextStyle.name, ListItem.name] }),
         TextStyle.configure({}),
         StarterKit.configure({
-        bulletList: {
+          bulletList: {
             keepMarks: true,
             keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
-        },
-        orderedList: {
+          },
+          orderedList: {
             keepMarks: true,
             keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
-        },
+          },
         }),
-    ],
-    content: post?.text,
-  }, [post]);
+      ],
+      content: post?.text,
+    },
+    [post]
+  );
 
   const handleUpdate = async () => {
     const editedContent = editor?.getHTML();
 
     try {
-      await axios.post('http://habitat:3001/xrpc/com.atproto.repo.putRecord', {
+      await axios.post(
+        'http://habitat:3001/xrpc/com.atproto.repo.putRecord',
+        {
           repo: 'did:plc:3wff4wcyfnjsxd2d2yz3azrj',
           collection: 'com.habitat.blog.post',
           rkey: '3ktiktrp54k2v',
@@ -75,12 +80,15 @@ const EditPage = () => {
             text: editedContent,
             createdAt: '1985-04-12T23:20:50.123Z',
           },
-        }, {
+        },
+        {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImNvbS5hdHByb3RvLmFjY2VzcyIsImF1ZCI6ImRpZDp3ZWI6bG9jYWxob3N0Iiwic3ViIjoiZGlkOnBsYzozd2ZmNHdjeWZuanN4ZDJkMnl6M2F6cmoiLCJpYXQiOjE3MTczMDg3NDMsImV4cCI6MTcxNzMxNTk0M30.VKx3w-ncNg6s389anh5mHcII6QKKwmMhWNgcf3d03h0',
+            Authorization:
+              'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImNvbS5hdHByb3RvLmFjY2VzcyIsImF1ZCI6ImRpZDp3ZWI6bG9jYWxob3N0Iiwic3ViIjoiZGlkOnBsYzozd2ZmNHdjeWZuanN4ZDJkMnl6M2F6cmoiLCJpYXQiOjE3MTczMDg3NDMsImV4cCI6MTcxNzMxNTk0M30.VKx3w-ncNg6s389anh5mHcII6QKKwmMhWNgcf3d03h0',
           },
-        });
+        }
+      );
     } catch (err) {
       console.error(err);
     }
@@ -96,25 +104,27 @@ const EditPage = () => {
 
   return (
     <div className="editor-container">
-        <div className="editor-heading">
-            <h2>Hola</h2>
-            <Button
-              variant="filled"
-              classNames={{
-                root: 'save-button',
-              }}
-              onClick={() => { handleUpdate(); }}
-            >
-                Save
-            </Button>
-        </div>
-        {editor && <BlogEditor tiptapEditor={editor} />}
+      <div className="editor-heading">
+        <h2>Hola</h2>
+        <Button
+          variant="filled"
+          classNames={{
+            root: 'save-button',
+          }}
+          onClick={() => {
+            handleUpdate();
+          }}
+        >
+          Save
+        </Button>
+      </div>
+      {editor && <BlogEditor tiptapEditor={editor} />}
     </div>
   );
 };
 
 interface BlogEditorProps {
-  tiptapEditor: Editor,
+  tiptapEditor: Editor;
 }
 
 const BlogEditor: React.FC<BlogEditorProps> = ({ tiptapEditor }) => (
@@ -167,6 +177,5 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ tiptapEditor }) => (
     <RichTextEditor.Content />
   </RichTextEditor>
 );
-
 
 export default EditPage;
