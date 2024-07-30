@@ -1,4 +1,6 @@
-import Editor from '../../components/editor';
+'use client';
+
+import Editor from '../components/editor';
 
 export default function EditPage() {
   return (
