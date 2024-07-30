@@ -26,7 +26,7 @@ jobs:
       - name: Run build
         run: npm run build
       - name: Tar build
-        run: tar -czf build.tar.gz .next
+        run: tar -czf build.tar.gz out
       - name: Run tests
         run: npm test
       - name: Release
