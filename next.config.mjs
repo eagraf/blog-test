@@ -6,6 +6,7 @@ const withBundleAnalyzer = bundleAnalyzer({
 
 export default withBundleAnalyzer({
   output: 'export',
+  basePath: '/blog-app',
   reactStrictMode: false,
   eslint: {
     ignoreDuringBuilds: true,
